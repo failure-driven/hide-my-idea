@@ -1,5 +1,49 @@
 import React, { useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./App.css";
+
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+function Idea({ idea, index, removeIdea }) {
+  return (
+    <Draggable draggableId={`${idea.id}-${idea.nam}`} index={index}>
+      {(provided) => (
+        <li
+          className="list-group-item"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <strong>{idea.name}</strong>
+          <br />
+          {idea.tagline}
+          <input
+            type="submit"
+            value="✖︎"
+            onClick={() => removeIdea(idea.id)}
+            className="float-right"
+          />
+        </li>
+      )}
+    </Draggable>
+  );
+}
+
+const IdeaList = React.memo(function IdeaList({ ideas, removeIdea }) {
+  return (
+    <ul className="list-group">
+      {ideas.map((idea, index) => (
+        <Idea idea={idea} index={index} key={idea.id} removeIdea={removeIdea} />
+      ))}
+    </ul>
+  );
+});
 
 function App() {
   const [term, setTerm] = useState("");
@@ -65,6 +109,24 @@ function App() {
   const removeIdea = (id) => {
     setIdeas(ideas.filter((idea) => idea.id !== id));
   };
+
+  function onDragEnd(result) {
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    const reorderedIdeas = reorder(
+      ideas,
+      result.source.index,
+      result.destination.index
+    );
+
+    setIdeas([...reorderedIdeas]);
+  }
 
   return (
     <div className="App">
@@ -141,21 +203,16 @@ function App() {
         </div>
         <div className="row">
           <div className="col">
-            <ul className="list-group">
-              {ideas.map(({ id, name, tagline }) => (
-                <li key={id} className="list-group-item">
-                  <strong>{name}</strong>
-                  <br />
-                  {tagline}
-                  <input
-                    type="submit"
-                    value="✖︎"
-                    onClick={() => removeIdea(id)}
-                    className="float-right"
-                  />
-                </li>
-              ))}
-            </ul>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="list">
+                {(provided) => (
+                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <IdeaList ideas={ideas} removeIdea={removeIdea} />
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
         </div>
       </div>
