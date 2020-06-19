@@ -4,6 +4,26 @@ Share your vulnerable ideas by hiding them amongst other ideas.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bab307f2-1e38-4b21-8fc6-73fe4a53d22a/deploy-status)](https://app.netlify.com/sites/hide-my-idea/deploys)
 
+it's as simple as
+
+1. Write your idea name and tagline
+1. Search and add from 1000's of ideas from [ProductHunt](https://www.producthunt.com/)
+1. Drag and drop to re-order ideas
+1. Share with a friend and see if in the list of ideas they also
+
+![hide my idea demo](public/hide_my_idea_demo.gif)
+
+## TODO
+
+Features coming:
+
+* button to shuffle the ideas
+* inline edit the ideas in the list, _to anonize or make them better at hiding your idea_
+* export text to make sharing easier
+* persist the ideas to share using the web
+* ability for a friend to rate the ideas and comment on them
+* ability for a number of firends to rate the ideas
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
