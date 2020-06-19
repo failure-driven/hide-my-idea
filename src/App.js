@@ -84,8 +84,9 @@ function App() {
       })
       .then((response) =>
         response.json().then((data) => {
-          const nameAndTagline = data.hits.map(({ name, tagline }) => {
+          const nameAndTagline = data.hits.map(({ id, name, tagline }) => {
             return {
+              id,
               name,
               tagline,
             };
@@ -183,6 +184,7 @@ function App() {
               <ul className="list-group">
                 {foundIdeas.map(({ id, name, tagline }) => (
                   <li key={id} className="list-group-item">
+                    <br />
                     {name}
                     <br />
                     {tagline}
@@ -191,6 +193,9 @@ function App() {
                       value="➕"
                       onClick={(event) => {
                         event.preventDefault();
+                        setFoundIdeas(
+                          foundIdeas.filter((foundIdea) => foundIdea.id !== id)
+                        );
                         appendIdea({ name, tagline });
                       }}
                       className="float-right"
