@@ -1,3 +1,11 @@
+# Hide my idea
+
+Share your vulnerable ideas by hiding them amongst other ideas.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bab307f2-1e38-4b21-8fc6-73fe4a53d22a/deploy-status)](https://app.netlify.com/sites/hide-my-idea/deploys)
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
