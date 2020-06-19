@@ -71,48 +71,27 @@ function App() {
       <header className="App-header">
         <h1>Hide my idea</h1>
       </header>
-      <form>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          ></input>
-        </div>
-        <div className="form-group">
-          <label>Tag line</label>
-          <textarea
-            value={tagline}
-            onChange={(event) => setTagline(event.target.value)}
-          ></textarea>
-        </div>
-        <input
-          type="submit"
-          value="➕"
-          onClick={(event) => {
-            event.preventDefault();
-            appendIdea({ name, tagline });
-          }}
-        />
-        <div className="form-group">
-          <label>Find ideas to hide amongst</label>
-          <input type="text" value={term} onChange={fetchIdeas}></input>
-          <input
-            type="submit"
-            value="✖︎"
-            onClick={(event) => {
-              event.preventDefault();
-              setFoundIdeas([]);
-            }}
-          />
-        </div>
-        <ul>
-          {foundIdeas.map(({ id, name, tagline }) => (
-            <li key={id}>
-              {name}
-              <br />
-              {tagline}
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <form>
+              <div className="form-group">
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  className="form-control"
+                ></input>
+              </div>
+              <div className="form-group">
+                <label>Tag line</label>
+                <textarea
+                  value={tagline}
+                  onChange={(event) => setTagline(event.target.value)}
+                  className="form-control"
+                ></textarea>
+              </div>
               <input
                 type="submit"
                 value="➕"
@@ -121,20 +100,65 @@ function App() {
                   appendIdea({ name, tagline });
                 }}
               />
-            </li>
-          ))}
-        </ul>
-      </form>
-      <ul>
-        {ideas.map(({ id, name, tagline }) => (
-          <li key={id}>
-            {name}
-            <br />
-            {tagline}
-            <input type="submit" value="✖︎" onClick={() => removeIdea(id)} />
-          </li>
-        ))}
-      </ul>
+              <div className="form-group">
+                <label>Find ideas to hide amongst</label>
+                <input
+                  type="text"
+                  value={term}
+                  onChange={fetchIdeas}
+                  className="form-control"
+                />
+              </div>
+              <input
+                type="submit"
+                value="✖︎"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setFoundIdeas([]);
+                }}
+                className="float-right"
+              />
+              <ul className="list-group">
+                {foundIdeas.map(({ id, name, tagline }) => (
+                  <li key={id} className="list-group-item">
+                    {name}
+                    <br />
+                    {tagline}
+                    <input
+                      type="submit"
+                      value="➕"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        appendIdea({ name, tagline });
+                      }}
+                      className="float-right"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </form>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <ul className="list-group">
+              {ideas.map(({ id, name, tagline }) => (
+                <li key={id} className="list-group-item">
+                  <strong>{name}</strong>
+                  <br />
+                  {tagline}
+                  <input
+                    type="submit"
+                    value="✖︎"
+                    onClick={() => removeIdea(id)}
+                    className="float-right"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
