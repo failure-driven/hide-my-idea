@@ -2,6 +2,8 @@
 
 Share your vulnerable ideas by hiding them amongst other ideas.
 
+Demo [https://hide-my-idea.netlify.app](https://hide-my-idea.netlify.app)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bab307f2-1e38-4b21-8fc6-73fe4a53d22a/deploy-status)](https://app.netlify.com/sites/hide-my-idea/deploys)
 
 it's as simple as
