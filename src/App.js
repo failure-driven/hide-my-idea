@@ -55,7 +55,7 @@ function App() {
     setIdeas([
       ...ideas,
       {
-        id: ideas.length + 1,
+        id: Math.max(...ideas.map(({ id }) => id)) + 1,
         ...idea,
       },
     ]);
